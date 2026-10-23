@@ -1,0 +1,6 @@
+طريقة الاستخدام من الهاتف:
+1) ارفع index.html إلى جذر مستودع GitHub (نفس مستوى README).
+2) أنشئ المسار .github/workflows/ ثم ملف build-apk.yml وانسخ إليه محتوى الملف الموجود في هذه الحزمة.
+3) افتح Actions في GitHub وشغّل Build GoalTracker APK عبر Run workflow.
+4) بعد نجاح البناء افتح نتيجة التشغيل وانزل إلى Artifacts ثم نزّل GoalTrackerAPK.zip؛ بداخله app-debug.apk.
+ملاحظة: هذا البناء يُنفّذ على GitHub، ولم يتم اختباره هنا؛ راجع سجل Actions إن فشل.

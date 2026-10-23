@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>متابعة الهدف</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#eef1f4;--sf:#fff;--ink:#14212b;--mut:#5b6b78;--ln:#d5dce3;--ac:#0f766e;--win:#15803d;--bad:#b42318;--amb:#b45309;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--sf:#17212c;--ink:#e6edf3;--mut:#93a4b3;--ln:#2a3846;--ac:#2dd4bf;--win:#4ade80;--bad:#f87171;--amb:#fbbf24;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1720;--sf:#17212c;--ink:#e6edf3;--mut:#93a4b3;--ln:#2a3846;--ac:#2dd4bf;--win:#4ade80;--bad:#f87171;--amb:#fbbf24;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "IBM Plex Sans Arabic",system-ui,sans-serif}
+main{max-width:520px;margin:0 auto;padding:16px 16px 48px}
+h1{font-size:20px;margin:8px 0 14px}
+h2{font-size:15px;margin:0 0 8px;color:var(--mut);font-weight:500}
+.box{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:14px;margin-bottom:12px}
+.big{font-size:34px;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}
+.mut{color:var(--mut);font-size:14px}
+.bar{position:relative;height:12px;background:var(--ln);border-radius:6px;margin:14px 0 6px;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--ac);border-radius:6px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.bar{direction:ltr}
+.ticks{position:relative;height:16px;direction:ltr;font-size:11px;color:var(--mut)}
+.ticks span{position:absolute;transform:translateX(-50%)}
+label{display:block;font-size:14px;color:var(--mut);margin:8px 0 4px}
+input{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink)}
+input:focus,button:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{font:inherit;cursor:pointer}
+.go{width:100%;margin-top:12px;padding:12px;border:0;border-radius:8px;background:var(--ac);color:#fff;font-weight:700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#06241f}}
+.sc{display:grid;grid-template-columns:1fr auto;gap:2px 10px;width:100%;text-align:start;background:var(--bg);color:var(--ink);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.sc b{font-variant-numeric:tabular-nums}
+.sc .d{grid-column:1/3;font-size:13px;color:var(--mut)}
+.sc.w{border-inline-start:4px solid var(--win)}.sc.h{border-inline-start:4px solid var(--amb)}.sc.l{border-inline-start:4px solid var(--bad)}
+.up{color:var(--win)}.dn{color:var(--bad)}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--ln);font-size:14px;font-variant-numeric:tabular-nums}
+.link{background:none;border:0;color:var(--mut);text-decoration:underline;padding:6px 0;margin-inline-end:14px;font-size:14px}
+.note{padding:10px 12px;border-radius:8px;margin-bottom:12px;font-size:14px;border:1px solid var(--amb);color:var(--amb)}
+.note.ok{border-color:var(--win);color:var(--win)}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pop{50%{transform:scale(1.12)}}
+@keyframes fl{from{background:color-mix(in srgb,var(--ac) 28%,transparent)}to{background:transparent}}
+@keyframes pulse{50%{transform:scale(1.05)}}
+#app>.box{animation:up .4s ease both}#app>.box:nth-child(2){animation-delay:.05s}#app>.box:nth-child(3){animation-delay:.1s}#app>.box:nth-child(4){animation-delay:.15s}
+.tg.pop{animation:pop .25s}.h-row.fl{animation:fl 1.4s ease-out}.big.done{animation:pulse 1.2s ease-in-out 3;color:var(--win)}
+button{transition:transform .12s,background .2s}button:active{transform:scale(.97)}
+.coach{border-inline-start:4px solid var(--ac)}.tip{font-size:14px;margin-top:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.tk{display:flex;gap:10px;align-items:flex-end;margin-bottom:8px}
+.tg{padding:10px 14px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);font-weight:700;min-width:84px}
+.tg.w{color:var(--win);border-color:var(--win)}.tg.l{color:var(--bad);border-color:var(--bad)}
+.ns{display:flex;gap:8px;margin:4px 0 8px}.ns button{flex:1;padding:8px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink)}
+.ns button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+</style>
+</head>
+<body>
+<main>
+<h1>متابعة الهدف</h1>
+<div id="app"></div>
+</main>
+<script>
+var S=null,LASTB=null,FLASH=false,KEY='goal-tracker-v1',N=2,R=[true,true,true,true],OD=['','','',''];
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}
+if(S&&!S.r){S.r=(S.f||0.25)*2}
+if(S&&S.n){N=S.n}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var $=function(id){return document.getElementById(id)};
+function fmt(n){return Math.round(n).toLocaleString('en-US')+' دج'}
+function sg(n){return (n>=0?'+':'−')+Math.abs(Math.round(n)).toLocaleString('en-US')}
+function sum(a,fn){return a.reduce(function(x,y,i){return x+fn(y,i)},0)}
+function daysLeft(bal,o){
+  if(bal>=S.goal)return 0;
+  var m=1+(S.r/o.length)*sum(o,function(v){return v-1});
+  return m<=1?Infinity:Math.ceil(Math.log(S.goal/bal)/Math.log(m));
+}
+function W(d){return d.w||(d.r==='W'?[1,1]:d.r==='A'?[1,0]:d.r==='B'?[0,1]:[0,0])}
+function bal(o,w,B,r){var s=B*(r||S.r)/o.length;return B+sum(o,function(v,i){return w[i]?s*(v-1):-s})}
+function odds(){var a=[],i;for(i=0;i<N;i++){OD[i]=$('o'+i).value;a.push(parseFloat(OD[i]))}return a}
+function start(){
+  var c=parseFloat($('c').value),g=parseFloat($('g').value),p=parseFloat($('p').value);
+  if(!(c>0)||!(g>c)||!(p>0&&p<=100)){$('err').textContent='أدخل رأس مال أصغر من الهدف، ومخاطرة يومية بين 1 و100.';return}
+  var d=parseInt($('d').value);S={start:c,goal:g,r:p/100,bal:c,n:2,dl:d>0?d:null,days:[]};LASTB=null;N=2;save();render();
+}
+function setup(){
+  $('app').innerHTML='<div class="box"><h2>ابدأ</h2>'+
+  '<label for="c">رأس المال (دج)</label><input id="c" type="number" inputmode="decimal" value="2000">'+
+  '<label for="g">الهدف (دج)</label><input id="g" type="number" inputmode="decimal" value="100000">'+
+  '<label for="p">المخاطرة اليومية الكلية (% من الرصيد، توزع على الأوراق)</label><input id="p" type="number" inputmode="decimal" value="50">'+'<label for="d">المدة المحددة للوصول (أيام، اختياري لتفعيل المدرب)</label><input id="d" type="number" inputmode="numeric" placeholder="مثال: 40">'+
+  '<div id="err" class="mut" style="color:var(--bad)"></div><button class="go" onclick="start()">ابدأ المتابعة</button></div>';
+}
+function setN(n){odds();N=n;S.n=n;save();main();prev()}
+function tg(i){R[i]=!R[i];var b=$('t'+i);b.className='tg pop '+(R[i]?'w':'l');b.textContent=R[i]?'فازت':'خسرت';prev()}
+function prev(){
+  var o=odds(),el=$('pv');coach(o);
+  if(!o.every(function(v){return v>1})){el.innerHTML='<div class="mut">أدخل معاملات الأوراق لتظهر النتائج المحتملة.</div>';return}
+  var B=S.bal,s=B*S.r/N,w=R.slice(0,N);
+  var best=daysLeft(bal(o,o.map(function(){return true}),B),o);
+  var h='<div class="mut" style="margin-bottom:8px">رهان كل ورقة: <b>'+fmt(s)+'</b> ('+(S.r/N*100).toFixed(1)+'% من الرصيد) · المجموع '+fmt(s*N)+'</div>';
+  var asc=o.slice().sort(function(a,b){return a-b}),k;
+  for(k=N;k>=0;k--){
+    var ww=asc.map(function(v,i){return i<k}),nb=bal(asc,ww,B),dl=daysLeft(nb,o),dd=nb-B,delay=(isFinite(dl)&&isFinite(best))?dl-best:0;
+    var cls=k===N?'w':(k===0?'l':'h');
+    h+='<div class="sc '+cls+'"><span>ربحت '+k+' من '+N+(k<N&&k>0?' (أسوأ ترتيب)':'')+'</span><b class="'+(dd>=0?'up':'dn')+'">'+sg(dd)+'</b><span class="d">الرصيد '+fmt(nb)+' ('+Math.round(nb/S.goal*100)+'% من الهدف) · '+(dl===0?'تصل الهدف':isFinite(dl)?'متبقي نحو '+dl+' يوم':'لا يتقدم')+(delay>0?' · تأخير '+delay+' يوم':'')+'</span></div>';
+  }
+  var nb2=bal(o,w,B);
+  h+='<button class="go" onclick="rec()">سجّل اليوم: الرصيد يصبح '+fmt(nb2)+' ('+sg(nb2-B)+')</button>';
+  el.innerHTML=h;
+}
+function rec(){
+  var o=odds();if(!o.every(function(v){return v>1}))return;
+  var w=R.slice(0,N),nb=bal(o,w,S.bal);
+  S.days.push({o:o,w:w,b:S.bal,a:nb});S.bal=nb;OD=['','','',''];R=[true,true,true,true];FLASH=true;save();render();
+}
+function undo(){var d=S.days.pop();if(d){S.bal=d.b;save();render()}}
+var armed=false;
+function reset(){
+  if(!armed){armed=true;$('rs').textContent='اضغط مرة أخرى للتأكيد';setTimeout(function(){armed=false;if($('rs'))$('rs').textContent='ابدأ من جديد'},4000);return}
+  S=null;try{localStorage.removeItem(KEY)}catch(e){}armed=false;render();
+}
+function stats(){
+  var n=S.days.length;if(!n)return '';
+  var won=0,tot=0,inv=0;
+  S.days.forEach(function(d){var o=d.o||[d.o1,d.o2],w=d.w||(d.r==='W'?[1,1]:d.r==='A'?[1,0]:d.r==='B'?[0,1]:[0,0]);o.forEach(function(v,i){tot++;inv+=1/v;if(w[i])won++})});
+  var rate=won/tot*100,be=inv/tot*100;
+  return '<div class="note '+(rate>=be?'ok':'')+'">فزت بـ'+won+' من '+tot+' ورقة ('+rate.toFixed(0)+'%). نقطة التعادل لمعاملاتك '+be.toFixed(0)+'%.'+(tot>=20&&rate<be?' أنت دونها، وهذا يعني أن الخطة تخسر حاليًا.':'')+'</div>';
+}
+function main(){
+  var B=S.bal,pos=Math.max(0,Math.min(1,Math.log(Math.max(B,1)/S.start)/Math.log(S.goal/S.start))),ticks='',k,i;
+  for(k=0;k<=8;k++){var v=S.start*Math.pow(2,k);if(v>=S.goal)break;ticks+='<span style="left:'+(Math.log(v/S.start)/Math.log(S.goal/S.start)*100)+'%">'+Math.round(v).toLocaleString('en-US')+'</span>'}
+  var warn='';
+  if(B>=S.goal)warn='<div class="note ok">وصلت الهدف. اسحب الأرباح وفكّر قبل البدء بدورة جديدة.</div>';
+  else if(B<=S.start*0.7)warn='<div class="note">وصلت حد الإيقاف (−30% من رأس المال). توقف وراجع الخطة.</div>';
+  var h='<div class="box"><h2>رصيدك الحالي</h2><div class="big'+(B>=S.goal?' done':'')+'" id="bal">'+fmt(LASTB==null?B:LASTB)+'</div><div class="mut">الهدف '+fmt(S.goal)+' · أنجزت '+(B/S.goal*100).toFixed(1)+'% · '+S.days.length+' يوم مسجل</div>'+
+  '<div class="bar"><i id="bf" style="width:0"></i></div><div class="ticks">'+ticks+'</div><div class="mut" style="margin-top:6px">الشريط بمقياس المضاعفات: كل علامة ضعف السابقة.</div></div>'+warn+stats()+'<div class="box coach" id="ch"></div>'+
+  '<div class="box"><h2>أوراق اليوم (يوم '+(S.days.length+1)+')</h2><div class="mut">عدد الأوراق (المخاطرة اليومية '+(S.r*100).toFixed(0)+'% توزع بينها)</div><div class="ns">';
+  [2,3,4].forEach(function(n){h+='<button class="'+(n===N?'on':'')+'" onclick="setN('+n+')">'+n+'</button>'});
+  h+='</div>';
+  for(i=0;i<N;i++)h+='<div class="tk"><div style="flex:1"><label for="o'+i+'">معامل الورقة '+(i+1)+'</label><input id="o'+i+'" type="number" step="0.01" inputmode="decimal" placeholder="1.50" value="'+OD[i]+'" oninput="prev()"></div><button id="t'+i+'" class="tg '+(R[i]?'w':'l')+'" onclick="tg('+i+')">'+(R[i]?'فازت':'خسرت')+'</button></div>';
+  h+='<div id="pv" style="margin-top:8px"></div></div>';
+  if(S.days.length){
+    h+='<div class="box"><h2>السجل</h2>';
+    S.days.slice().reverse().forEach(function(d,i){
+      var n=S.days.length-i,o=d.o||[d.o1,d.o2],w=W(d);
+      h+='<div class="h-row'+(i===0&&FLASH?' fl':'')+'"><span>'+n+' · '+w.map(function(x){return x?'✅':'❌'}).join('')+'</span><span>'+o.join(' / ')+'</span><b>'+fmt(d.a)+'</b></div>';
+    });
+    h+='</div>';
+  }
+  h+='<button class="link" onclick="undo()">تراجع عن آخر يوم</button><button class="link" id="rs" onclick="reset()">ابدأ من جديد</button>';
+  $('app').innerHTML=h;countUp($('bal'),LASTB,B);LASTB=B;FLASH=false;requestAnimationFrame(function(){requestAnimationFrame(function(){$('bf').style.width=(pos*100)+'%'})});
+}
+
+function countUp(el,a,b){if(a==null||a===b||matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=fmt(b);return}var t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/700),e=1-Math.pow(1-p,3);el.textContent=fmt(a+(b-a)*e);if(p<1)requestAnimationFrame(f)})(t0)}
+function setDl(v){var d=parseInt(v);S.dl=d>0?d:null;save();main();prev()}
+function setR(r){S.r=r;save();main();prev()}
+function tk(){var won=0,tot=0,inv=0;S.days.forEach(function(d){var o=d.o||[d.o1,d.o2],w=W(d);o.forEach(function(v,i){tot++;inv+=1/v;if(w[i])won++})});return{tot:tot,rate:tot?won/tot*100:0,be:tot?inv/tot*100:0}}
+function pct(x){return x==null?'—':x>1?'غير ممكن في الموعد':(x*100).toFixed(0)+'% يوميًا'}
+function coach(o){
+  var el=$('ch');if(!el)return;
+  var ed='<div class="row2"><div><label for="dl">المدة الكلية للوصول (أيام)</label><input id="dl" type="number" inputmode="numeric" value="'+(S.dl||'')+'" placeholder="مثال: 40" onchange="setDl(this.value)"></div><div class="mut" style="align-self:end;padding-bottom:10px">'+(S.dl?'اليوم '+S.days.length+' من '+S.dl:'')+'</div></div>';
+  var h='<h2>المدرب</h2>'+ed;
+  if(!S.dl){el.innerHTML=h+'<div class="mut">حدد مدة للوصول إلى الهدف ليحسب المدرب نسبة المال المطلوبة كل يوم.</div>';return}
+  var B=S.bal,G=S.goal,used=S.days.length,rem=S.dl-used;
+  if(B>=G){el.innerHTML=h+'<div class="up">وصلت الهدف قبل المدة. اسحب الأرباح.</div>';return}
+  if(rem<=0){var d0=Math.ceil(Math.log(G/B)/Math.log(1+S.r*0.5));el.innerHTML=h+'<div class="dn">انتهت المدة وما زال ينقصك '+fmt(G-B)+'. بنسبتك الحالية تحتاج نحو '+d0+' يومًا إضافيًا. مدّد المدة بدل رفع المخاطرة.</div>';return}
+  var ok=o&&o.every(function(v){return v>1}),oo=ok?o:Array(N).fill(1.5),sp=sum(oo,function(v){return v-1});
+  var rr=(Math.pow(G/B,1/rem)-1)*N/sp,rec=Math.min(0.6,Math.max(0.1,Math.ceil(rr*20)/20));
+  var gap=(B/(S.start*Math.pow(G/S.start,used/S.dl))-1)*100;
+  h+='<div class="mut">المتبقي '+rem+' يوم · أنت '+(gap>=0?'أمام':'خلف')+' المسار بـ'+Math.abs(gap).toFixed(0)+'%'+(ok?'':' · الحساب بمعامل 1.5 لكل ورقة حتى تدخل المعاملات')+'</div>';
+  if(rr>1){el.innerHTML=h+'<div class="note" style="margin-top:8px">الهدف غير ممكن في '+rem+' يوم بهذه المعاملات حتى لو راهنت برصيدك كله. مدّد المدة أو خفّض الهدف.</div>';return}
+  h+='<div style="margin:8px 0"><b>الخطوة القادمة:</b> خاطر بـ<b>'+(rec*100).toFixed(0)+'%</b> من رصيدك ('+fmt(B*rec)+')، أي '+fmt(B*rec/N)+' لكل ورقة. '+(rr>0.6?'المطلوب فعليًا '+(rr*100).toFixed(0)+'%، ولا أنصح بتجاوز 60%.':'يكفيك '+(rr*100).toFixed(0)+'% لتبقى في الموعد.')+'</div>';
+  if(Math.abs(rec-S.r)>1e-9)h+='<button class="link" onclick="setR('+rec+')">اعتمد '+(rec*100).toFixed(0)+'% كمخاطرة يومية</button>';
+  if(rr>0.6){var dd=Math.ceil(Math.log(G/B)/Math.log(1+0.5/N*sp));h+='<div class="note">بمخاطرة 50% تحتاج نحو '+dd+' يومًا، أي مدّد المدة '+Math.max(0,dd-rem)+' يومًا تقريبًا.</div>'}
+  var all=oo.map(function(){return true}),best=bal(oo,all,B,rec),mm=1+rec/N*sp,asc=oo.slice().sort(function(a,b){return a-b});
+  var l1=bal(asc,asc.map(function(v,i){return i<N-1}),B,rec),l0=bal(asc,asc.map(function(){return false}),B,rec);
+  function bk(nb){return Math.ceil(Math.log(best/nb)/Math.log(mm))}
+  function nd(nb){return rem>1?(Math.pow(G/nb,1/(rem-1))-1)*N/sp:null}
+  h+='<div class="mut" style="margin-top:8px">لو خسرت ورقة واحدة: الرصيد '+fmt(l1)+'، تعود للخلف نحو '+bk(l1)+' يوم، والمطلوب بعدها '+pct(nd(l1))+'.</div>';
+  h+='<div class="mut">لو خسرت الكل: الرصيد '+fmt(l0)+'، تعود للخلف نحو '+bk(l0)+' يوم، والمطلوب بعدها '+pct(nd(l0))+'.</div>';
+  var tips=[],last=S.days[S.days.length-1],lost=function(d){return W(d).some(function(x){return !x})},s=tk();
+  if(last&&lost(last))tips.push('خسرت ورقة في آخر يوم: لا تعوّضها بزيادة المبلغ، والتزم بالنسبة أعلاه.');
+  if(S.days.length>1&&lost(last)&&lost(S.days[S.days.length-2]))tips.push('يومان متتاليان بخسارة: ارجع إلى ورقتين فقط وتأكد من التشكيلات الرسمية قبل اللعب.');
+  if(gap<-15)tips.push('أنت متأخر عن المسار: لا ترفع المخاطرة فوق 60%، ومدّد المدة إن لزم.');
+  if(gap>10)tips.push('أنت أسرع من المسار: يمكنك تقليل المخاطرة وحماية ما كسبته.');
+  if(s.tot>=10&&s.rate<s.be)tips.push('نسبة فوزك دون نقطة التعادل: إن استمرت فلن تصل. اختر أقوى ورقتين فقط.');
+  tips.push('اختر أوراقًا بمعامل 1.5 أو أكثر ومن مباريات مستقلة.');
+  h+=tips.slice(0,3).map(function(x){return '<div class="tip">• '+x+'</div>'}).join('');
+  el.innerHTML=h;
+}
+function render(){if(!S)setup();else{main();prev()}}
+render();
+</script>
+</body>
+</html>
