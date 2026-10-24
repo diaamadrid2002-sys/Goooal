@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>goal!</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f766e">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#eef1f4;--sf:#fff;--ink:#14212b;--mut:#5b6b78;--ln:#d5dce3;--ac:#0f766e;--win:#15803d;--bad:#b42318;--amb:#b45309;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--sf:#17212c;--ink:#e6edf3;--mut:#93a4b3;--ln:#2a3846;--ac:#2dd4bf;--win:#4ade80;--bad:#f87171;--amb:#fbbf24;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1720;--sf:#17212c;--ink:#e6edf3;--mut:#93a4b3;--ln:#2a3846;--ac:#2dd4bf;--win:#4ade80;--bad:#f87171;--amb:#fbbf24;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "IBM Plex Sans Arabic",system-ui,sans-serif}
+main{max-width:520px;margin:0 auto;padding:16px 16px 48px}
+h1{font-size:20px;margin:8px 0 14px}
+h2{font-size:15px;margin:0 0 8px;color:var(--mut);font-weight:500}
+.box{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:14px;margin-bottom:12px}
+.big{font-size:34px;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}
+.mut{color:var(--mut);font-size:14px}
+.bar{position:relative;height:12px;background:var(--ln);border-radius:6px;margin:14px 0 6px;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--ac);border-radius:6px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.bar{direction:ltr}
+.ticks{position:relative;height:16px;direction:ltr;font-size:11px;color:var(--mut)}
+.ticks span{position:absolute;transform:translateX(-50%)}
+label{display:block;font-size:14px;color:var(--mut);margin:8px 0 4px}
+input{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink)}
+input:focus,button:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{font:inherit;cursor:pointer}
+.go{width:100%;margin-top:12px;padding:12px;border:0;border-radius:8px;background:var(--ac);color:#fff;font-weight:700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .go{color:#06241f}}
+.sc{display:grid;grid-template-columns:1fr auto;gap:2px 10px;width:100%;text-align:start;background:var(--bg);color:var(--ink);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+.sc b{font-variant-numeric:tabular-nums}
+.sc .d{grid-column:1/3;font-size:13px;color:var(--mut)}
+.sc.w{border-inline-start:4px solid var(--win)}.sc.h{border-inline-start:4px solid var(--amb)}.sc.l{border-inline-start:4px solid var(--bad)}
+.up{color:var(--win)}.dn{color:var(--bad)}
+.h-row{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--ln);font-size:14px;font-variant-numeric:tabular-nums}
+.link{background:none;border:0;color:var(--mut);text-decoration:underline;padding:6px 0;margin-inline-end:14px;font-size:14px}
+.note{padding:10px 12px;border-radius:8px;margin-bottom:12px;font-size:14px;border:1px solid var(--amb);color:var(--amb)}
+.note.ok{border-color:var(--win);color:var(--win)}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pop{50%{transform:scale(1.12)}}
+@keyframes fl{from{background:color-mix(in srgb,var(--ac) 28%,transparent)}to{background:transparent}}
+@keyframes pulse{50%{transform:scale(1.05)}}
+#app>.box{animation:up .4s ease both}#app>.box:nth-child(2){animation-delay:.05s}#app>.box:nth-child(3){animation-delay:.1s}#app>.box:nth-child(4){animation-delay:.15s}
+.tg.pop{animation:pop .25s}.h-row.fl{animation:fl 1.4s ease-out}.big.done{animation:pulse 1.2s ease-in-out 3;color:var(--win)}
+button{transition:transform .12s,background .2s}button:active{transform:scale(.97)}
+.coach{border-inline-start:4px solid var(--ac)}.tip{font-size:14px;margin-top:4px}
+.tk-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.st{display:flex;align-items:center;gap:10px}.st button{width:36px;height:36px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink);font-size:18px}.st b{min-width:20px;text-align:center}
+.coach{padding:10px 12px}.ch-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.sm{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mut);margin:0}.sm input{width:72px;padding:4px 8px;font-size:14px}
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px}.cg div{background:var(--bg);border-radius:8px;padding:6px 8px;text-align:center;font-size:12px;color:var(--mut)}.cg b{display:block;font-size:16px;color:var(--ink)}.cg b.up{color:var(--win)}.cg b.dn{color:var(--bad)}
+.nx{font-size:14px;margin:4px 0}.nx button{margin-inline-start:6px;padding:2px 8px;border:1px solid var(--ac);background:none;color:var(--ac);border-radius:6px;font-size:12px}.sb{display:grid;gap:2px;font-size:13px;color:var(--mut)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.tk{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;margin-bottom:8px}.tk label{font-size:12px;margin:0 0 3px}.go:disabled{opacity:.4}
+.tg{padding:10px 14px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);font-weight:700;min-width:84px}
+.tg.w{color:var(--win);border-color:var(--win)}.tg.l{color:var(--bad);border-color:var(--bad)}
+.ns{display:flex;gap:8px;margin:4px 0 8px}.ns button{flex:1;padding:8px;border:1px solid var(--ln);border-radius:8px;background:var(--bg);color:var(--ink)}
+.ns button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+</style>
+</head>
+<body>
+<main>
+<h1><span aria-hidden="true">⚽</span> goal!</h1>
+<div id="app"></div>
+</main>
+<script>
+var S=null,LASTB=null,FLASH=false,KEY='goal-tracker-v1',N=2,R=Array(10).fill(true),OD=Array(10).fill(''),ST=Array(10).fill('');
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){S=null}
+if(S&&!S.r){S.r=(S.f||0.25)*2}
+if(S&&S.n){N=S.n}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var $=function(id){return document.getElementById(id)};
+function fmt(n){return Math.round(n).toLocaleString('en-US')+' دج'}
+function sg(n){return (n>=0?'+':'−')+Math.abs(Math.round(n)).toLocaleString('en-US')}
+function sum(a,fn){return a.reduce(function(x,y,i){return x+fn(y,i)},0)}
+function daysLeft(bal,m){if(bal>=S.goal)return 0;return m<=1?Infinity:Math.ceil(Math.log(S.goal/bal)/Math.log(m))}
+function W(d){return d.w||(d.r==='W'?[1,1]:d.r==='A'?[1,0]:d.r==='B'?[0,1]:[0,0])}
+function bal(o,w,B,r){var s=B*(r||S.r)/o.length;return B+sum(o,function(v,i){return w[i]?s*(v-1):-s})}
+function stk(auto){var a=[],i,v;for(i=0;i<N;i++){v=$('s'+i);ST[i]=v?v.value:'';a.push(parseFloat(ST[i])>0?parseFloat(ST[i]):auto)}return a}
+function odds(){var a=[],i;for(i=0;i<N;i++){OD[i]=$('o'+i).value;a.push(parseFloat(OD[i]))}return a}
+function start(){
+  var c=parseFloat($('c').value),g=parseFloat($('g').value),p=parseFloat($('p').value);
+  if(!(c>0)||!(g>c)||!(p>0&&p<=100)){$('err').textContent='أدخل رأس مال أقل من الهدف ومخاطرة بين 1 و100.';return}
+  var d=parseInt($('d').value);S={start:c,goal:g,r:p/100,bal:c,n:2,dl:d>0?d:null,days:[]};LASTB=null;N=2;save();render();
+}
+function hp(){var x=parseFloat($('p').value)/100;$('hp').textContent=x>0&&x<=1?frT(x)+' · مثلًا '+fr(x/2)+' لكل ورقة (لورقتين). توزعه كما تشاء.':''}
+function setup(){
+  $('app').innerHTML='<div class="box"><h2>ابدأ</h2>'+
+  '<label for="c">رأس المال (دج)</label><input id="c" type="number" inputmode="decimal" value="2000">'+
+  '<label for="g">الهدف (دج)</label><input id="g" type="number" inputmode="decimal" value="100000">'+
+  '<label for="p">أقصى ما تراهن به يوميًا (% من الرصيد)</label><input id="p" type="number" inputmode="decimal" value="50" oninput="hp()"><div id="hp" class="mut" style="margin-top:4px">نصف الرصيد · مثلًا ربع لكل ورقة (لورقتين). توزعه كما تشاء.</div>'+'<label for="d">المدة (أيام، اختياري)</label><input id="d" type="number" inputmode="numeric" placeholder="مثال: 40">'+
+  '<div id="err" class="mut" style="color:var(--bad)"></div><button class="go" onclick="start()">ابدأ المتابعة</button></div>';
+}
+function setN(n){if(n<1||n>10)return;odds();stk(0);N=n;S.n=n;save();main();prev()}
+function tg(i){R[i]=!R[i];var b=$('t'+i);b.className='tg pop '+(R[i]?'w':'l');b.textContent=R[i]?'فازت':'خسرت';prev()}
+function prev(){
+  var o=odds(),el=$('pv');coach(o);
+  var B=S.bal,auto=B*S.r/N,st=stk(auto),lim=B*S.r,tot=sum(st,function(v){return v}),over=tot>lim+0.5;
+  var h='<div class="mut">الحد اليوم: <b>'+frT(S.r)+'</b> ('+fmt(lim)+') · مجموعك <b class="'+(over?'dn':'')+'">'+fmt(tot)+'</b></div>';
+  if(over)h+='<div class="note">تجاوزت الحد بـ'+fmt(tot-lim)+'. خفّض المبالغ.</div>';
+  else if(st.some(function(v){return v>B*0.3}))h+='<div class="note">أكثر من 30% من رصيدك على ورقة واحدة.</div>';
+  if(!o.every(function(v){return v>1})){el.innerHTML=h+'<div class="mut">أدخل المعاملات.</div>';return}
+  var w=R.slice(0,N),rets=o.map(function(v,i){return st[i]*v}),srt=rets.slice().sort(function(a,b){return a-b});
+  var m=1+sum(o,function(v,i){return st[i]*(v-1)})/B,best=daysLeft(B-tot+sum(rets,function(v){return v}),m);
+  (N>1?[N,N-1,0]:[1,0]).forEach(function(k){
+    var nb=B-tot+sum(srt.slice(0,k),function(v){return v}),dl=daysLeft(nb,m),dd=nb-B,delay=(isFinite(dl)&&isFinite(best))?dl-best:0;
+    h+='<div class="sc '+(k===N?'w':k===0?'l':'h')+'"><span>ربحت '+k+'/'+N+(k>0&&k<N?' (أسوأ حال)':'')+'</span><b class="'+(dd>=0?'up':'dn')+'">'+sg(dd)+'</b><span class="d">'+fmt(nb)+' · '+Math.round(nb/S.goal*100)+'% · '+(dl===0?'الهدف':isFinite(dl)?dl+' يوم':'—')+(delay>0?' (+'+delay+')':'')+'</span></div>';
+  });
+  var nb2=B-tot+sum(rets,function(v,i){return w[i]?v:0});
+  h+='<button class="go" onclick="rec()"'+(over?' disabled':'')+'>سجّل اليوم ← '+fmt(nb2)+'</button>';
+  el.innerHTML=h;
+}
+function rec(){
+  var o=odds();if(!o.every(function(v){return v>1}))return;
+  var B=S.bal,st=stk(B*S.r/N),tot=sum(st,function(v){return v});if(tot>B*S.r+0.5)return;
+  var w=R.slice(0,N),nb=B-tot+sum(o,function(v,i){return w[i]?st[i]*v:0});
+  S.days.push({o:o,st:st,w:w,b:B,a:nb});S.bal=nb;OD=Array(10).fill('');ST=Array(10).fill('');R=Array(10).fill(true);FLASH=true;save();render();
+}
+function undo(){var d=S.days.pop();if(d){S.bal=d.b;save();render()}}
+var armed=false;
+function reset(){
+  if(!armed){armed=true;$('rs').textContent='اضغط مرة أخرى للتأكيد';setTimeout(function(){armed=false;if($('rs'))$('rs').textContent='ابدأ من جديد'},4000);return}
+  S=null;try{localStorage.removeItem(KEY)}catch(e){}armed=false;render();
+}
+function stats(){
+  var n=S.days.length;if(!n)return '';
+  var won=0,tot=0,inv=0;
+  S.days.forEach(function(d){var o=d.o||[d.o1,d.o2],w=d.w||(d.r==='W'?[1,1]:d.r==='A'?[1,0]:d.r==='B'?[0,1]:[0,0]);o.forEach(function(v,i){tot++;inv+=1/v;if(w[i])won++})});
+  var rate=won/tot*100,be=inv/tot*100;
+  return '<div class="note '+(rate>=be?'ok':'')+'">فزت '+won+'/'+tot+' ('+rate.toFixed(0)+'%) · التعادل '+be.toFixed(0)+'%'+(tot>=20&&rate<be?' · أنت دونه':'')+'</div>';
+}
+function main(){
+  var B=S.bal,pos=Math.max(0,Math.min(1,Math.log(Math.max(B,1)/S.start)/Math.log(S.goal/S.start))),ticks='',k,i;
+  for(k=0;k<=8;k++){var v=S.start*Math.pow(2,k);if(v>=S.goal)break;ticks+='<span style="left:'+(Math.log(v/S.start)/Math.log(S.goal/S.start)*100)+'%">'+Math.round(v).toLocaleString('en-US')+'</span>'}
+  var warn='';
+  if(B>=S.goal)warn='<div class="note ok">وصلت الهدف. اسحب أرباحك.</div>';
+  else if(B<=S.start*0.7)warn='<div class="note">حد الإيقاف: خسرت 30%. توقف وراجع.</div>';
+  var h='<div class="box"><h2>الرصيد</h2><div class="big'+(B>=S.goal?' done':'')+'" id="bal">'+fmt(LASTB==null?B:LASTB)+'</div><div class="mut">الهدف '+fmt(S.goal)+' · '+(B/S.goal*100).toFixed(1)+'% · '+S.days.length+' يوم</div>'+
+  '<div class="bar"><i id="bf" style="width:0"></i></div><div class="ticks">'+ticks+'</div></div>'+warn+stats()+'<div class="box coach" id="ch"></div>'+
+  '<div class="box"><div class="tk-h"><b>أوراق اليوم · يوم '+(S.days.length+1)+'</b><div class="st"><button onclick="setN('+(N-1)+')">−</button><b>'+N+'</b><button onclick="setN('+(N+1)+')">+</button></div></div>';
+  var auto=B*S.r/N;for(i=0;i<N;i++)h+='<div class="tk"><div><label for="o'+i+'">الورقة '+(i+1)+' · المعامل</label><input id="o'+i+'" type="number" step="0.01" inputmode="decimal" placeholder="1.50" value="'+OD[i]+'" oninput="prev()"></div><div><label for="s'+i+'">المبلغ (دج)</label><input id="s'+i+'" type="number" inputmode="decimal" placeholder="'+Math.round(auto)+'" value="'+ST[i]+'" oninput="prev()"></div><button id="t'+i+'" class="tg '+(R[i]?'w':'l')+'" onclick="tg('+i+')">'+(R[i]?'فازت':'خسرت')+'</button></div>';
+  h+='<div id="pv" style="margin-top:8px"></div></div>';
+  if(S.days.length){
+    h+='<div class="box"><h2>السجل</h2>';
+    S.days.slice().reverse().forEach(function(d,i){
+      var n=S.days.length-i,o=d.o||[d.o1,d.o2],w=W(d);
+      h+='<div class="h-row'+(i===0&&FLASH?' fl':'')+'"><span>'+n+' · '+w.map(function(x){return x?'✅':'❌'}).join('')+'</span><span>'+o.join(' / ')+'</span><b>'+fmt(d.a)+'</b></div>';
+    });
+    h+='</div>';
+  }
+  h+='<button class="link" onclick="undo()">تراجع عن آخر يوم</button><button class="link" id="rs" onclick="reset()">ابدأ من جديد</button>';
+  $('app').innerHTML=h;countUp($('bal'),LASTB,B);LASTB=B;FLASH=false;requestAnimationFrame(function(){requestAnimationFrame(function(){$('bf').style.width=(pos*100)+'%'})});
+}
+
+function countUp(el,a,b){if(a==null||a===b||matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=fmt(b);return}var t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/700),e=1-Math.pow(1-p,3);el.textContent=fmt(a+(b-a)*e);if(p<1)requestAnimationFrame(f)})(t0)}
+function setDl(v){var d=parseInt(v);S.dl=d>0?d:null;save();main();prev()}
+function setR(r){S.r=r;save();main();prev()}
+function tk(){var won=0,tot=0,inv=0;S.days.forEach(function(d){var o=d.o||[d.o1,d.o2],w=W(d);o.forEach(function(v,i){tot++;inv+=1/v;if(w[i])won++})});return{tot:tot,rate:tot?won/tot*100:0,be:tot?inv/tot*100:0}}
+function fr(x){var n=[[1,'كل'],[0.5,'نصف'],[1/3,'ثلث'],[0.25,'ربع'],[0.2,'خمس'],[1/6,'سدس'],[0.125,'ثمن'],[0.1,'عُشر']],i;for(i=0;i<n.length;i++)if(Math.abs(x-n[i][0])<0.004)return n[i][1];return (x*100).toFixed(0)+'%'}
+function frT(x){var f=fr(x);return /%/.test(f)?f+' من الرصيد':f+' الرصيد'}
+function pct(x){return x==null?'—':x>1?'مستحيل':(x*100).toFixed(0)+'%'}
+function coach(o){
+  var el=$('ch');if(!el)return;
+  var hd='<div class="ch-h"><b>المدرب</b><label class="sm">المدة <input id="dl" type="number" inputmode="numeric" value="'+(S.dl||'')+'" placeholder="أيام" onchange="setDl(this.value)"></label></div>';
+  var B=S.bal,G=S.goal,used=S.days.length,rem=S.dl?S.dl-used:0;
+  if(!S.dl){el.innerHTML=hd+'<div class="mut">حدد مدة بالأيام لتفعيله.</div>';return}
+  if(B>=G){el.innerHTML=hd+'<div class="up">وصلت الهدف. اسحب أرباحك.</div>';return}
+  if(rem<=0){el.innerHTML=hd+'<div class="dn">انتهت المدة. ينقصك '+fmt(G-B)+'. مدّد المدة.</div>';return}
+  var ok=o&&o.every(function(v){return v>1}),oo=ok?o:Array(N).fill(1.5),sp=sum(oo,function(v){return v-1});
+  var rr=(Math.pow(G/B,1/rem)-1)*N/sp,cap=Math.min(0.6,0.3*N),rec=Math.min(cap,Math.max(0.1,Math.ceil(rr*20)/20));
+  var gap=(B/(S.start*Math.pow(G/S.start,used/S.dl))-1)*100;
+  var h=hd+'<div class="cg"><div>المتبقي<b>'+rem+' يوم</b></div><div>المسار<b class="'+(gap>=0?'up':'dn')+'">'+(gap>=0?'+':'−')+Math.abs(gap).toFixed(0)+'%</b></div><div>المطلوب يوميًا<b>'+pct(rr)+'</b></div></div>';
+  if(rr>1){el.innerHTML=h+'<div class="nx dn">الهدف مستحيل في المدة. مدّد المدة أو خفّض الهدف.</div>';return}
+  var dd=Math.ceil(Math.log(G/B)/Math.log(1+0.5/N*sp));
+  h+='<div class="nx">غدًا: راهن حتى <b>'+frT(rec)+'</b> ('+fmt(B*rec)+')'+(N>1?' · مثلًا '+fr(rec/N)+' لكل ورقة':'')+(Math.abs(rec-S.r)>1e-9?'<button onclick="setR('+rec+')">اعتمد</button>':'')+(rr>cap?'<div class="dn">تحتاج '+pct(rr)+'، أكثر من الحد الآمن. مدّد '+Math.max(0,dd-rem)+' يوم.</div>':'')+'</div>';
+  var best=bal(oo,oo.map(function(){return true}),B,rec),mm=1+rec/N*sp,asc=oo.slice().sort(function(a,b){return a-b});
+  var l1=bal(asc,asc.map(function(v,i){return i<N-1}),B,rec),l0=bal(asc,asc.map(function(){return false}),B,rec);
+  function bk(nb){return Math.ceil(Math.log(best/nb)/Math.log(mm))}
+  function nd(nb){return rem>1?(Math.pow(G/nb,1/(rem-1))-1)*N/sp:null}
+  h+='<div class="sb">'+(N>1?'<span>خسارة ورقة: −'+bk(l1)+' يوم · يلزم '+pct(nd(l1))+'</span>':'')+'<span>'+(N>1?'خسارة الكل':'خسارة الورقة')+': −'+bk(l0)+' يوم · يلزم '+pct(nd(l0))+'</span></div>';
+  var last=S.days[used-1],lost=function(d){return W(d).some(function(x){return !x})},s=tk(),tip='اختر معامل 1.5 فأكثر ومباريات مستقلة.';
+  if(last&&lost(last))tip='لا تعوّض الخسارة بزيادة المبلغ.';
+  if(used>1&&lost(last)&&lost(S.days[used-2]))tip='خسارتان متتاليتان: خفّض الأوراق وراجع التشكيلات.';
+  else if(gap<-15)tip='متأخر: لا تتجاوز الحد الآمن، ومدّد المدة.';
+  else if(gap>10)tip='متقدم: خفّض المخاطرة واحمِ ما كسبت.';
+  if(s.tot>=10&&s.rate<s.be)tip='فوزك دون التعادل: اختر الأقوى فقط.';
+  el.innerHTML=h+'<div class="tip">💡 '+tip+'</div>';
+}
+function render(){if(!S)setup();else{main();prev()}}
+render();
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
+</script>
+</body>
+</html>
